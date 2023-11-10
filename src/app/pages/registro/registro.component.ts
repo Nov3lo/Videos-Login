@@ -15,6 +15,7 @@ export class RegistroComponent implements OnInit {
 
 
   usuario = new UsuarioModel();
+  recordarme = false;
 
   constructor( private auth: AuthService,
     private router: Router) { }
@@ -23,7 +24,8 @@ export class RegistroComponent implements OnInit {
 
     this.usuario = new UsuarioModel();
 
-    this.usuario.email = 'erikcruz3214@gmail.com';
+
+    //this.usuario.email = 'chiquil092006@gmail.com';
   }
 
   onSubmit(form: NgForm) {
@@ -45,6 +47,9 @@ export class RegistroComponent implements OnInit {
         //console.log(form);
         console.log(resp);
         Swal.close();
+        if ( this.recordarme ) {
+          localStorage.setItem('email', this.usuario.email);
+        }
         this.router.navigateByUrl('/home');
 
       }, (err) => {
